@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Installer.View.InstallerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Installer.View"
+             xmlns:converters="clr-namespace:Installer.Converters"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             DataContext="{Binding InstallerVM, Source={StaticResource Locator}}">
+    <FrameworkElement.Resources>
+        <converters:DateTimeToDayConverter x:Key="DateTimeToDayConverter"/>
+        <converters:BusyStatusToTextConverter x:Key="BusyStatusToTextConverter"/>
+    </FrameworkElement.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Grid Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ComboBox SelectedIndex="0" Style="{StaticResource MarginComboBox}" Margin="2.5,0" Grid.Column="0"
+                Grid.Row="0" ItemsSource="{Binding Architectures, Mode=OneWay}"
+                SelectedItem="{Binding SelectedArchitecture, Mode=TwoWay}"/>
+            <ComboBox SelectedIndex="0" Style="{StaticResource MarginComboBox}" Margin="2.5,0" Grid.Column="1"
+                Grid.Row="0" ItemsSource="{Binding BuildsLoader.AvailableVersions, Mode=OneWay}"
+                SelectedItem="{Binding SelectedVersion, Mode=TwoWay}"/>
+            <ComboBox SelectedIndex="0" Style="{StaticResource MarginComboBox}" Margin="2.5,0" Grid.Column="2"
+                Grid.Row="0" ItemsSource="{Binding BuildsLoader.AvailableYears, Mode=OneWay}"
+                SelectedItem="{Binding SelectedYear, Mode=TwoWay}"/>
+            <ProgressBar Name="ProgressBarUninstall" Margin="2.5,4" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
+                   IsIndeterminate="{Binding InstallBarInProgress}"/>
+            <Button Content="Search" Style="{StaticResource MarginButton}" Margin="2.5, 0, 2.5, 3" Grid.Column="3"
+              Grid.RowSpan="2" Command="{Binding GetBuildsCommand}"/>
+        </Grid>
+        <Grid Name="BuildInstall" Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DataGrid Name="BuildsList" Grid.Row="0" GridLinesVisibility="None" IsReadOnly="true"
+                AutoGenerateColumns="false" HeadersVisibility="Column" ItemsSource="{Binding Builds}"
+                SelectedItem="{Binding SelectedBuild, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
+                    <DataGridTextColumn Header="Year version" Binding="{Binding Year}"/>
+                    <DataGridTextColumn Header="Date" SortDirection="Descending"
+                              Binding="{Binding Date, Converter={StaticResource DateTimeToDayConverter}}"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Busy, Converter={StaticResource BusyStatusToTextConverter}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Grid.Row="1" Content="Install" Style="{StaticResource MarginButton}"
+              Command="{Binding InstallBuildCommand}" CommandParameter="{Binding ElementName=BuildsList}"/>
+        </Grid>
+    </Grid>
+</UserControl>

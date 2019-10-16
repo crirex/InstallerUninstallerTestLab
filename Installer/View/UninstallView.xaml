@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Uninstaller.View.UninstallView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Uninstaller.View"
+             DataContext="{Binding UninstallerVM, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Grid Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ProgressBar Name="ProgressBarUninstall" Margin="2.5, 0, 2.5, 4" Grid.RowSpan="2" Grid.Column="0" Grid.Row="0"
+                   IsIndeterminate="{Binding UninstallBarInProgress}"/>
+            <Button Grid.Column="1" Grid.RowSpan="2" Margin="2.5, 0, 2.5, 3" Style="{StaticResource MarginButton}"
+              Content="Search" Command="{Binding RefreshCommand}"/>
+        </Grid>
+        <Grid Column="3" Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DataGrid Name="BuildsList" Grid.Row="0" GridLinesVisibility="None" IsReadOnly="true"
+                AutoGenerateColumns="false" HeadersVisibility="Column" ItemsSource="{Binding List}"
+                SelectedItem="{Binding SelectedUninstallItem, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Grid.Row="1" Style="{StaticResource MarginButton}" Content="Uninstall"
+              Command="{Binding UninstallProgramCommand}" CommandParameter="{Binding ElementName=BuildsList}"/>
+        </Grid>
+    </Grid>
+</UserControl>

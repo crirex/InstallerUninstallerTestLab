@@ -1,0 +1,55 @@
+﻿<Window x:Class="InstallerUninstallerTestLab.View.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InstallerUninstallerTestLab.View"
+        xmlns:converters="clr-namespace:Installer.Converters"
+        Name="SettingsWindow" Icon="../Images/TestLabSmall.ico" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" Title="Settings" Height="200" Width="400"
+        DataContext="{Binding SettingsVM, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Row="0" Column="0" ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Name="PathMessage" Grid.Column="0" Height="auto" Margin="3" Text="Installations path"
+                 VerticalAlignment="Center" ToolTip="Path to installations folder"/>
+            <TextBox Name="PathString" Grid.Column="1" Margin="3" VerticalAlignment="Center"
+               Text="{Binding UserPath, Mode=TwoWay}"/>
+            <Button Name="BrowseButton" Grid.Column="2" Content="Browse" Height="auto" Width="auto" Margin="3"
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding BrowseCommand}"
+              CommandParameter="{Binding ElementName=PathString}"/>
+        </Grid>
+        <TextBlock Name="DependenciesMessage" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Height="auto"
+               Margin="3" Text="Modify dependencies" VerticalAlignment="Center"
+               ToolTip="Some applications are dependent on others. In such case, there must exist an uninstall order."/>
+        <Button Name="DependenciesButton" Grid.Row="1" Grid.Column="2" Content="Dependencies" Height="auto"
+            Width="auto" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            Command="{Binding DependenciesCommand}"/>
+        <TextBlock Name="TextBoxLocation" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Height="auto" Margin="3"
+               Text="Logging message class location (for debug)" VerticalAlignment="Center"/>
+        <CheckBox Name="CheckBoxLocation" Grid.Row="2" Grid.Column="2" Height="auto" Width="auto"
+              HorizontalAlignment="Center" VerticalAlignment="Center"
+              IsChecked="{Binding isCheckedLocation, Mode=TwoWay}"/>
+        <Button Name="CancelButton" Grid.Row="3" Grid.Column="1" Content="Cancel" Height="auto" Width="auto"
+            Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=SettingsWindow}"/>
+        <Button Name="SaveButton" Grid.Row="3" Grid.Column="2" Content="Save" Height="auto" Width="auto" Margin="3"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding SavePathCommand}"
+            CommandParameter="{Binding ElementName=PathString}"/>
+    </Grid>
+</Window>
