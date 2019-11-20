@@ -117,7 +117,7 @@ namespace Uninstaller.ViewModel
         {
             try
             {
-                LoggerUtils.LogMessage("Search installed components has started", (LogLevel)LogLevel.Info, UninstallerViewModel.logger);
+                LoggerUtils.LogMessage("Search installed components will start", (LogLevel)LogLevel.Info, UninstallerViewModel.logger);
                 Stopwatch watch = Stopwatch.StartNew();
                 this.UninstallBarInProgress = true;
                 await Task.Run((Action)(() => this.List = new ObservableCollection<NameObject>((IEnumerable<NameObject>)this.GetProducts())));
@@ -192,7 +192,7 @@ namespace Uninstaller.ViewModel
                 }
                 else
                 {
-                    LoggerUtils.LogMessage("Uninstall opperation has started", (LogLevel)LogLevel.Info, UninstallerViewModel.logger);
+                    LoggerUtils.LogMessage("Uninstall opperation will start", (LogLevel)LogLevel.Info, UninstallerViewModel.logger);
                     Stopwatch watch = Stopwatch.StartNew();
                     await this.UninstallListOfPrograms(selectedItemsList);
                     watch.Stop();

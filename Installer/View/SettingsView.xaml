@@ -30,7 +30,7 @@
                  VerticalAlignment="Center" ToolTip="Path to installations folder"/>
             <TextBox Name="PathString" Grid.Column="1" Margin="3" VerticalAlignment="Center"
                Text="{Binding UserPath, Mode=TwoWay}"/>
-            <Button Name="BrowseButton" Grid.Column="2" Content="Browse" Height="auto" Width="auto" Margin="3"
+            <Button Name="BrowseButton" Grid.Column="2" Content="Browse" Height="auto" Width="auto" Margin="5, 9"
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding BrowseCommand}"
               CommandParameter="{Binding ElementName=PathString}"/>
         </Grid>
@@ -38,17 +38,17 @@
                Margin="3" Text="Modify dependencies" VerticalAlignment="Center"
                ToolTip="Some applications are dependent on others. In such case, there must exist an uninstall order."/>
         <Button Name="DependenciesButton" Grid.Row="1" Grid.Column="2" Content="Dependencies" Height="auto"
-            Width="auto" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            Width="auto" Margin="5, 9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             Command="{Binding DependenciesCommand}"/>
-        <TextBlock Name="TextBoxLocation" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Height="auto" Margin="3"
+        <TextBlock Name="TextBoxLocation" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Height="auto" Margin="5, 9"
                Text="Logging message class location (for debug)" VerticalAlignment="Center"/>
         <CheckBox Name="CheckBoxLocation" Grid.Row="2" Grid.Column="2" Height="auto" Width="auto"
               HorizontalAlignment="Center" VerticalAlignment="Center"
               IsChecked="{Binding isCheckedLocation, Mode=TwoWay}"/>
         <Button Name="CancelButton" Grid.Row="3" Grid.Column="1" Content="Cancel" Height="auto" Width="auto"
-            Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            Margin="5, 9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=SettingsWindow}"/>
-        <Button Name="SaveButton" Grid.Row="3" Grid.Column="2" Content="Save" Height="auto" Width="auto" Margin="3"
+        <Button Name="SaveButton" Grid.Row="3" Grid.Column="2" Content="Save" Height="auto" Width="auto" Margin="5, 9"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding SavePathCommand}"
             CommandParameter="{Binding ElementName=PathString}"/>
     </Grid>

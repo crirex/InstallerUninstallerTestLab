@@ -203,7 +203,7 @@ namespace Installer.ViewModel
                 Architecture? selectedArchitecture = this.SelectedArchitecture;
                 Architecture architecture1 = (Architecture)1;
                 string architecture = (string)(selectedArchitecture.GetValueOrDefault() == architecture1 & selectedArchitecture.HasValue ? Files.X64Architecture : Files.X32Architecture);
-                LoggerUtils.LogMessage("Search for builds has started", (LogLevel)LogLevel.Info, InstallerViewModel.logger);
+                LoggerUtils.LogMessage("Search for builds will start", (LogLevel)LogLevel.Info, InstallerViewModel.logger);
                 List<Build> results = new List<Build>();
                 await Task.Run((Action)(() =>
                 {
@@ -234,7 +234,7 @@ namespace Installer.ViewModel
         {
             string path = (buildsList.SelectedItem as Build)?.Path;
             buildsList.SelectedItem = (object)null;
-            LoggerUtils.LogMessage("Install opperation started", (LogLevel)LogLevel.Info, InstallerViewModel.logger);
+            LoggerUtils.LogMessage("Install opperation will start", (LogLevel)LogLevel.Info, InstallerViewModel.logger);
             try
             {
                 this.InstallBarInProgress = true;
